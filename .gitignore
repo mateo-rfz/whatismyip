@@ -2,3 +2,4 @@ test.*
 *.db
 venv/
 whatismyip-logfile.txt
+note.txt
