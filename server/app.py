@@ -1,4 +1,4 @@
-from flask import Flask , request , jsonify , render_template
+from flask import Flask , request , jsonify , render_template , send_file
 import socket
 import requests
 import json
@@ -29,6 +29,12 @@ def whatismyip():
     infq = checkIpInfo((request.remote_addr))
     return render_template("home.html" , ip = request.remote_addr ,country = infq["country"] ,
                             city = infq["city"] , isp =infq["isp"])
+
+
+
+@app.route("/logo")
+def logo() : 
+     return send_file("static/logo.png")
 
 
 
