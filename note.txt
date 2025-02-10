@@ -1,1 +1,4 @@
-add loger for client
+add search box in main site for show ip info with search
+create a menu (
+    in main menu show informaion and create a button for redirect to search page
+)
