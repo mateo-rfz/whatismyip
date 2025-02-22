@@ -31,13 +31,13 @@ def whatismyip():
         
         infq = checkIpInfo((rqIp))
         try : 
-            country , city , isp = infq["country"] , infq["city"] , infq["isp"]
+            country , city , isp , countryCode = infq["country"] , infq["city"] , infq["isp"] , infq["countryCode"]
         except Exception : 
-            country , city , isp = None , None , None
+            country , city , isp , countryCode = None , None , None , None
 
 
-        return render_template("home.html" , ip = rqIp ,country = country ,
-                            city = city , isp = isp)
+        return render_template("home.html" , ip = request.remote_addr ,country = country ,
+                                city = city , isp = isp , countryCode = countryCode)
     
     else : 
         infq = checkIpInfo((request.remote_addr))
