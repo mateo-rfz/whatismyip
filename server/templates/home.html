@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>whatismyip</title>
     <link rel="icon" href="{{ url_for('logo') }}" type="image/x-icon">
-
     <style>
         body {
             background-color: #121212;
@@ -20,112 +19,122 @@
             min-height: 100vh;
             text-align: center;
         }
-
         h1 {
             color: #1db954;
             margin-bottom: 20px;
             font-size: 2rem;
         }
-
         .info-card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1e1e1e, #292929);
+            border-radius: 12px;
             padding: 20px;
             width: 90%;
             max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            text-align: left;
         }
-
         .info-item {
             margin-bottom: 15px;
             font-size: 1rem;
+            padding: 10px;
+            border-bottom: 1px solid #333;
         }
-
+        .info-item:last-child {
+            border-bottom: none;
+        }
         .info-item span {
             font-weight: bold;
             color: #1db954;
         }
-
+        .input-container {
+            display: flex;
+            gap: 12px;
+            width: 85%;
+            max-width: 550px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            outline: none;
+            font-size: 1rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+        input::placeholder {
+            color: #888;
+        }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #1db954, #17a74a);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #17a74a, #1db954);
+        }
         footer {
             margin-top: 20px;
             font-size: 0.9rem;
             color: #777;
         }
-
         footer a {
             text-decoration: none;
-        }
-
-        footer a:first-of-type {
             color: #c5c5c5;
         }
-
-        footer a:last-of-type {
-            color: #1db954;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (min-width: 1024px) {
+        @media (max-width: 480px) {
             body {
                 padding: 20px;
             }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .info-card {
-                padding: 30px;
-                max-width: 400px;
-            }
-
-            .info-item {
-                font-size: 1.2rem;
-            }
-
-            footer {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .info-card {
-                padding: 10px;
-            }
-
-            .info-item {
-                font-size: 0.9rem;
-            }
-
             h1 {
                 font-size: 1.5rem;
+            }
+            .info-card {
+                padding: 15px;
+                width: 90%;
+                border-radius: 15px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+            .info-item {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+            .input-container {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+            input, button {
+                width: 90%;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Your Information</h1>
+    <h1>WHAT IS MY IP</h1>
     <div class="info-card">
-        <div class="info-item">
-            <span>IP Address:</span> <span id="ip">{{ip}}</span>
-        </div>
-        <div class="info-item">
-            <span>Country:</span> <span id="location">{{country}}</span>
-        </div>
-        <div class="info-item">
-            <span>City:</span> <span id="isp">{{city}}</span>
-        </div>
-        <div class="info-item">
-            <span>ISP:</span> <span id="browser">{{isp}}</span>
-        </div>
+        <form action="{{ url_for('whatismyip') }}" method="POST" class="input-container">
+            <input type="text" name="ip" placeholder="Enter IP Address">
+            <button type="submit">Check</button>
+        </form>
+        <div class="info-item"><span>IP Address:</span> <span id="ip">{{ip}}</span></div>
+        <div class="info-item"><span>Country:</span> <span id="location">{{country}}</span></div>
+        <div class="info-item"><span>City:</span> <span id="city">{{city}}</span></div>
+        <div class="info-item"><span>ISP:</span> <span id="isp">{{isp}}</span></div>
     </div>
     <footer>
-        Made with ❤️ By <a href="https://github.com/mateo-rfz">Mateo</a> | <a href="https://github.com/mateo-rfz/whatismyip">Learn More</a>
+        Made with ❤️ By <a href="https://github.com/mateo-rfz">Mateo</a>
     </footer>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # WHAT IS MY IP 
 
-
+![web pic](.github/pic1.png)
 
 This lightweight and fast script allows you to effortlessly display your public IP address and key network details, such as location and ISP. A practical tool for checking your internet connection status and related information! 🚀
 
