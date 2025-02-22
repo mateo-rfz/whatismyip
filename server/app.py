@@ -58,16 +58,10 @@ def logo() :
 
 
 
-@app.route("/countryFlag", methods=["GET"])
-def countryFlag():
-    countryCode = request.args.get('countryCode', '').lower()
-    if not countryCode:
-        return "Country code is required", 400
-    
-    try:
-        return send_from_directory('static/flags', f"{countryCode.lower()}.svg")
-    except FileNotFoundError:
-        return "Flag not found", 404
+@app.route('/flags/<country_code>')
+def get_flag(country_code):
+    return send_from_directory('static/flags', f"{country_code.lower()}.svg")
+
 
 
 

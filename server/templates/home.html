@@ -130,7 +130,7 @@
         </form>
         <div class="info-item"><span>IP Address:</span> <span id="ip">{{ip}}</span></div>
         <div class="info-item"><span>Country:</span> <span id="location">{{country}}
-            <img src="{{ url_for('countryFlag' , countryCode=countryCode)}}" alt="" width="30" height="17">
+            <img src="{{ url_for('get_flag', country_code=countryCode) }}" alt="Country Flag" width="100" height="60">
         </span>
         </div>
         <div class="info-item"><span>City:</span> <span id="city">{{city}}</span></div>
