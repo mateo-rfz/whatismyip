@@ -36,7 +36,7 @@ def whatismyip():
             country , city , isp , countryCode = None , None , None , None
 
 
-        return render_template("home.html" , ip = request.remote_addr ,country = country ,
+        return render_template("home.html" , ip = rqIp ,country = country ,
                                 city = city , isp = isp , countryCode = countryCode)
     
     else : 
