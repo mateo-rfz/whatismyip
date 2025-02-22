@@ -22,13 +22,32 @@ def whatIsMyIp():
     return jsonify({"ip":request.remote_addr})
 
 
-@app.route("/" , methods = ["GET"])
+@app.route("/" , methods = ["GET" , "POST"])
 def whatismyip():
     loger.loger(request.remote_addr , request.user_agent , request.base_url)
 
-    infq = checkIpInfo((request.remote_addr))
-    return render_template("home.html" , ip = request.remote_addr ,country = infq["country"] ,
-                            city = infq["city"] , isp =infq["isp"])
+    if request.method == "POST" :
+        rqIp = request.form.get("ip")
+        
+        infq = checkIpInfo((rqIp))
+        try : 
+            country , city , isp = infq["country"] , infq["city"] , infq["isp"]
+        except Exception : 
+            country , city , isp = None , None , None
+
+
+        return render_template("home.html" , ip = rqIp ,country = country ,
+                            city = city , isp = isp)
+    
+    else : 
+        infq = checkIpInfo((request.remote_addr))
+        try : 
+            country , city , isp = infq["country"] , infq["city"] , infq["isp"]
+        except Exception : 
+            country , city , isp = None , None , None
+            
+        return render_template("home.html" , ip = request.remote_addr ,country = country ,
+                                city = city , isp = isp)
 
 
 
