@@ -1,4 +1,4 @@
-from flask import Flask , request , jsonify , render_template , send_file
+from flask import Flask , request , jsonify , render_template , send_file , send_from_directory
 import socket
 import requests
 import json
@@ -58,5 +58,17 @@ def logo() :
 
 
 
+@app.route("/countryFlag" , methods = ["GET"]) 
+def countryFlag() :
+    ip = request.remote_addr
+    try : 
+        countryCode = checkIpInfo(ip)["countryCode"]
+    except Exception : 
+        countryCode = None
+    countryCode = "ir"
+    return send_from_directory('static/flags', f"{country_code.lower()}.svg")
+
+
+
 if (__name__) == ("__main__"):
-    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 80)
+    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 80 , debug=True)
