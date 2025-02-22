@@ -65,7 +65,7 @@ def countryFlag():
         return "Country code is required", 400
     
     try:
-        return send_from_directory('static/flags', f"{countryCode}.svg")
+        return send_from_directory('static/flags', f"{countryCode.lower()}.svg")
     except FileNotFoundError:
         return "Flag not found", 404
 
