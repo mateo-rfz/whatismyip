@@ -64,9 +64,15 @@ def countryFlag() :
     try : 
         countryCode = checkIpInfo(ip)["countryCode"]
     except Exception : 
-        countryCode = None
-    countryCode = "ir"
-    return send_from_directory('static/flags', f"{country_code.lower()}.svg")
+        countryCode = None     
+    """
+    search on static/flags 
+    with this format ex. us.svg
+    """
+    return send_from_directory('static/flags', f"{countryCode.lower()}.svg")
+
+
+
 
 
 
