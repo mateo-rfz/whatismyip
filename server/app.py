@@ -59,7 +59,7 @@ def logo() :
 
 
 @app.route('/flags/<cc>')
-def get_flag(cc):
+def countryFlag(cc):
     return send_from_directory('static/flags', f"{cc.lower()}.svg")
 
 
