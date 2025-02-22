@@ -42,12 +42,12 @@ def whatismyip():
     else : 
         infq = checkIpInfo((request.remote_addr))
         try : 
-            country , city , isp = infq["country"] , infq["city"] , infq["isp"]
+            country , city , isp , countryCode = infq["country"] , infq["city"] , infq["isp"] , infq["countryCode"]
         except Exception : 
-            country , city , isp = None , None , None
+            country , city , isp , countryCode = None , None , None , None
             
         return render_template("home.html" , ip = request.remote_addr ,country = country ,
-                                city = city , isp = isp)
+                                city = city , isp = isp , countryCode = countryCode)
 
 
 
@@ -58,18 +58,16 @@ def logo() :
 
 
 
-@app.route("/countryFlag" , methods = ["GET"]) 
-def countryFlag() :
-    ip = request.remote_addr
-    try : 
-        countryCode = checkIpInfo(ip)["countryCode"]
-    except Exception : 
-        countryCode = None     
-    """
-    search on static/flags 
-    with this format ex. us.svg
-    """
-    return send_from_directory('static/flags', f"{countryCode.lower()}.svg")
+@app.route("/countryFlag", methods=["GET"])
+def countryFlag():
+    countryCode = request.args.get('countryCode', '').lower()
+    if not countryCode:
+        return "Country code is required", 400
+    
+    try:
+        return send_from_directory('static/flags', f"{countryCode}.svg")
+    except FileNotFoundError:
+        return "Flag not found", 404
 
 
 
@@ -77,4 +75,4 @@ def countryFlag() :
 
 
 if (__name__) == ("__main__"):
-    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 80 , debug=True)
+    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 80 , debug=False)
