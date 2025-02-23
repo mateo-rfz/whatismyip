@@ -33,7 +33,7 @@ def whatismyip():
         try : 
             country , city , isp , countryCode = infq["country"] , infq["city"] , infq["isp"] , infq["countryCode"]
         except Exception : 
-            country , city , isp , countryCode = None , None , None , None
+            country , city , isp , countryCode = None , None , None , "default"
 
 
         return render_template("home.html" , ip = rqIp ,country = country ,
@@ -44,7 +44,7 @@ def whatismyip():
         try : 
             country , city , isp , countryCode = infq["country"] , infq["city"] , infq["isp"] , infq["countryCode"]
         except Exception : 
-            country , city , isp , countryCode = None , None , None , None
+            country , city , isp , countryCode = None , None , None , "default"
             
         return render_template("home.html" , ip = request.remote_addr ,country = country ,
                                 city = city , isp = isp , countryCode = countryCode)
@@ -60,8 +60,10 @@ def logo() :
 
 @app.route('/flags/<cc>')
 def countryFlag(cc):
-    return send_from_directory('static/flags', f"{cc.lower()}.svg")
-
+    try : 
+        return send_from_directory('static/flags', f"{cc.lower()}.svg")
+    except Exception : 
+        return send_from_directory('static/flags', "default.svg")
 
 
 
