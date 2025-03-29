@@ -69,4 +69,4 @@ def countryFlag(cc):
 
 
 if (__name__) == ("__main__"):
-    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 80 , debug=False)
+    app.run(host = socket.gethostbyname(socket.gethostname()) , port = 6002 , debug=False)
